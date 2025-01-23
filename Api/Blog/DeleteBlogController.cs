@@ -15,7 +15,7 @@ public class DeleteBlogController : ApiController
         _mediator = mediator;
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
     public IActionResult Delete(string id)
     {

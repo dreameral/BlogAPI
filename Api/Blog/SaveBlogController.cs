@@ -18,6 +18,7 @@ public class SaveBlogController : ApiController
         _createBlogValidator = createBlogValidator;
     }
 
+    [Authorize(Roles = "ADMIN")]
     [HttpPost]
     public async Task<IActionResult> AddBlog([FromBody] CreateBlogDto requestDto)
     {
@@ -31,7 +32,7 @@ public class SaveBlogController : ApiController
         return Ok(await _mediator.Send(requestDto));
     }
     
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateBlog(string id, [FromBody] CreateBlogDto requestDto)
     {

@@ -37,23 +37,21 @@ services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
 
-services.AddAuthentication(cfg =>
+services.AddAuthentication(options =>
     {
-        cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer("Bearer", options =>
+    .AddJwtBearer(o =>
     {
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters
+        o.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "your_issuer",
-            ValidAudience = "your_audience",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            IssuerSigningKey = new SymmetricSecurityKey
+                (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = true
         };
     });
 
