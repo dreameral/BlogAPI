@@ -4,6 +4,9 @@ project.lock.json
 .DS_Store
 *.pyc
 nupkg/
+BlogAPI/obj/
+BlogAPI.Tests.Integration/obj/
+BlogAPI.Tests.Unit/obj/
 
 # Visual Studio Code
 .vscode
