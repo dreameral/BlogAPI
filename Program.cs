@@ -19,7 +19,6 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
-
 services.AddDbContext<DataContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
@@ -72,3 +71,5 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 
 app.Run();
+
+public partial class Program {}
